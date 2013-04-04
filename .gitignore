@@ -1,6 +1,6 @@
 *.class
 *.log
 *.zip
-target/
 *.jar
+target/
 **/lib_managed/
