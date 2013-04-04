@@ -3,4 +3,4 @@
 *.zip
 target/
 *.jar
-**/lib/
+**/lib_managed/
