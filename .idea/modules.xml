@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/recfun/progfun-funsets.iml" filepath="$PROJECT_DIR$/recfun/progfun-funsets.iml" />
       <module fileurl="file://$PROJECT_DIR$/objsets/progfun-objsets.iml" filepath="$PROJECT_DIR$/objsets/progfun-objsets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/patmat/progfun-patmat.iml" filepath="$PROJECT_DIR$/patmat/progfun-patmat.iml" />
       <module fileurl="file://$PROJECT_DIR$/recfun/progfun-recfun.iml" filepath="$PROJECT_DIR$/recfun/progfun-recfun.iml" />
       <module fileurl="file://$PROJECT_DIR$/week1/week1.iml" filepath="$PROJECT_DIR$/week1/week1.iml" />
       <module fileurl="file://$PROJECT_DIR$/week2/week2.iml" filepath="$PROJECT_DIR$/week2/week2.iml" />
