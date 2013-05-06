@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/forcomp/progfun-forcomp.iml" filepath="$PROJECT_DIR$/forcomp/progfun-forcomp.iml" />
       <module fileurl="file://$PROJECT_DIR$/recfun/progfun-funsets.iml" filepath="$PROJECT_DIR$/recfun/progfun-funsets.iml" />
       <module fileurl="file://$PROJECT_DIR$/objsets/progfun-objsets.iml" filepath="$PROJECT_DIR$/objsets/progfun-objsets.iml" />
       <module fileurl="file://$PROJECT_DIR$/patmat/progfun-patmat.iml" filepath="$PROJECT_DIR$/patmat/progfun-patmat.iml" />
