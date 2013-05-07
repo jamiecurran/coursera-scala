@@ -53,12 +53,11 @@ object Anagrams {
    *    List(('a', 1), ('e', 1), ('t', 1)) -> Seq("ate", "eat", "tea")
    *
    */
-  lazy val dictionaryByOccurrences: Map[Occurrences, List[Word]] =  ???
-    //dictionary map (word => (Anagrams.wordOccurrences(word), List(word))) groupBy(_._1)
-    //for(word <- dictionary) yield (Anagrams.wordOccurrences(word), word)
+  lazy val dictionaryByOccurrences: Map[Occurrences, List[Word]] =  for((k, v) <- dictionary map (word => (Anagrams.wordOccurrences(word), List(word))) groupBy(_._1)) yield (k, v.flatMap(_._2))
+
 
   /** Returns all the anagrams of a given word. */
-  def wordAnagrams(word: Word): List[Word] = ???
+  def wordAnagrams(word: Word): List[Word] = dictionaryByOccurrences(wordOccurrences(word))
 
   /** Returns the list of all subsets of the occurrence list.
    *  This includes the occurrence itself, i.e. `List(('k', 1), ('o', 1))`
