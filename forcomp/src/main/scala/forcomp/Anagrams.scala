@@ -81,10 +81,17 @@ object Anagrams {
    *  Note that the order of the occurrence list subsets does not matter -- the subsets
    *  in the example above could have been displayed in some other order.
    */
-  def combinations(occurrences: Occurrences): List[Occurrences] = ???
-
-  // for((x,y) <- occurrence; count <- 1 to y) yield (x, count)
-  //
+  def combinations(occurrences: Occurrences): List[Occurrences] = {
+      if(occurrences.isEmpty) List(List())
+      else {
+        for{
+          split <- 1 to occurrences.length
+          rest <- combinations(occurrences drop split)
+          (x,y) <- occurrences take split
+          count <- 1 to y
+        } yield (x,count) :: rest
+      }.toList ::: List(List())
+    }
 
 
   /** Subtracts occurrence list `y` from occurrence list `x`.
@@ -97,7 +104,7 @@ object Anagrams {
    *  Note: the resulting value is an occurrence - meaning it is sorted
    *  and has no zero-entries.
    */
-  def subtract(x: Occurrences, y: Occurrences): Occurrences = ???
+  def subtract(x: Occurrences, y: Occurrences): Occurrences =  x.filter{ case(c,v) => c != y.head._1}
 
   /** Returns a list of all anagram sentences of the given sentence.
    *  
