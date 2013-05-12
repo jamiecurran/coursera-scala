@@ -53,7 +53,11 @@ object Anagrams {
    *    List(('a', 1), ('e', 1), ('t', 1)) -> Seq("ate", "eat", "tea")
    *
    */
-  lazy val dictionaryByOccurrences: Map[Occurrences, List[Word]] =  for((k, v) <- dictionary map (word => (Anagrams.wordOccurrences(word), List(word))) groupBy(_._1)) yield (k, v.flatMap(_._2))
+  lazy val dictionaryByOccurrences: Map[Occurrences, List[Word]] =  {
+    for{
+      (k, v) <- dictionary map (word => (wordOccurrences(word), List(word))) groupBy(_._1)
+    } yield (k -> v.flatMap(_._2))
+  }.toMap withDefaultValue(List())
 
 
   /** Returns all the anagrams of a given word. */
@@ -104,7 +108,19 @@ object Anagrams {
    *  Note: the resulting value is an occurrence - meaning it is sorted
    *  and has no zero-entries.
    */
-  def subtract(x: Occurrences, y: Occurrences): Occurrences =  x.filter{ case(c,v) => c != y.head._1}
+  def subtract(x: Occurrences, y: Occurrences): Occurrences = {
+
+    def subtractOccurrence(xMap: Map[Char, Int], entry: (Char, Int)): Map[Char, Int] = {
+      val (char, value) = entry
+      if(xMap(char) - value <= 0) xMap - char
+      else xMap + (char -> (xMap(char) - value))
+    }
+
+    val xMap = x.toMap withDefaultValue 0
+    val yMap = y.toMap
+    yMap.foldLeft(xMap)(subtractOccurrence).toList.sortBy(result => result._1)
+
+  }
 
   /** Returns a list of all anagram sentences of the given sentence.
    *  
@@ -146,6 +162,20 @@ object Anagrams {
    *
    *  Note: There is only one anagram of an empty sentence.
    */
-  def sentenceAnagrams(sentence: Sentence): List[Sentence] = ???
+  def sentenceAnagrams(sentence: Sentence): List[Sentence] = {
+
+    def occurrencesAnagrams(occurrences: Occurrences): List[Sentence] = {
+      if(occurrences.isEmpty) List(List())
+      else {
+        for {
+          combo <- combinations(occurrences)
+          word <- dictionaryByOccurrences(combo)
+          rest <- occurrencesAnagrams(subtract(occurrences, combo))
+        } yield word :: rest
+      }.distinct
+    }
+    occurrencesAnagrams(sentenceOccurrences(sentence))
+  }
 
 }
+
